@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Docfy</title>
+
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/main.js"></script>
+
+  </head>
+<body>
+  <div class="wrapper">
+    <header id="header">
+      <div class="container">
+        <h1>Docfy</h1>
+        <div class="user-info">
+          <p class="welcome">
+            Bem vindo<br>
+            <strong>{{ user }}</strong>
+          </p>
+          <a href="/signout" class="btn btn-danger">
+            <img src="/signout.svg">
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section id="main">
+      <div class="container">
+        <header>
+          <h2>{{ nameProject }}</h2>
+          <div class="addon">
+            <form action="/destroy/{{ projectId }}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger">Excluir Projeto</button>
+            </form>
+          </div>
+        </header>
+
+        <section id="content">
+          <nav>
+            {% for sessao in sessionProject %}
+              <div class="sessions {% if session.id == sessao.id %}active{% endif %} ">
+                <a href="/session/{{ sessao.id }}">{{ sessao.title }}</a>
+              </div>
+            {% endfor %}
+            <form action="/{{ projectId }}/registerSession" method="POST">
+              <div>
+                <input type="text" name="title" placeholder="Nova seção">
+                <textarea cols="30" rows="30" name="content" class="mde" placeholder="Conteúdo da sessão"></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn1"><img class="plus" src="/plus.svg"></button>
+              <div>
+            </form>
+          </nav>
+          <article>
+            <div class="project-header">
+              <h1>{{ session.title }}</h1>
+            </div>
+            {% if session.content %}
+              <div class="project-header">
+                <form action="/destroySession/{{ session.id }}?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger">Remover Sessão</button>
+                </form>
+              </div>
+              <p>{{ session.content }}</p>
+            {% endif %}
+          </article>
+        </section>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
