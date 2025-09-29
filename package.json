@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.3",
     "connect-flash": "^0.1.1",
     "connect-session-sequelize": "^5.2.2",
     "express": "^4.16.3",
